@@ -160,7 +160,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="e524894efe6267def9eaf2c3ab3364006d55dc84">
+        sha1="7756fd74ed261c164dac2d4c31d849c2ce466f0e">
         <dex dex="/home/nminh/workspace/coderschool/todoAppv2/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d7079bdf814d92b0e045e5592cf5bb284750e060/classes.dex" />
     </item>
     <item
@@ -232,7 +232,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="b56db2b7d7240f5df9d2290a234aaaf1c4380bd8">
+        sha1="35ecdbe6598cde95a662b75433ea46fce4c7495f">
         <dex dex="/home/nminh/workspace/coderschool/todoAppv2/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_36336db7d10a9956f4a2aae0a1806dd726cf88f8/classes.dex" />
     </item>
     <item
