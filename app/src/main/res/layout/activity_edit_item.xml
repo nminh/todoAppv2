@@ -27,8 +27,7 @@
         android:layout_below="@+id/et_EditItem"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/btn_Save"
-        android:onClick="onSave"/>
+        android:id="@+id/btn_Save" />
 
     <TextView
         android:text="@string/tv_text"

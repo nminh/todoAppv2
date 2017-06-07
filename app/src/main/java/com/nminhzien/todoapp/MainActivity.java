@@ -1,12 +1,8 @@
 package com.nminhzien.todoapp;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,30 +12,35 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> TodoList;
     ArrayAdapter<String> aTodoAdapter;
-    ListView lvItems;
-    EditText etEditText;
     private final int REQUEST_CODE = 01;
     public static final String ITEM_NAME = "todoItemName";
     public static final String ITEM_POSITION = "position";
     TodoItemDatabase tododb;
+    @BindView(R.id.edEditTest) EditText etEditText;
+    @BindView(R.id.lvItems) ListView lvItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
         tododb = new TodoItemDatabase(this);
         TodoList = new ArrayList<String>();
         TodoList = tododb.getAllTasks();
 
         populateArrayItems();
-        lvItems = (ListView) findViewById(R.id.lvItems);
+
         lvItems.setAdapter(aTodoAdapter);
-        etEditText = (EditText) findViewById(R.id.edEditTest);
+
         //Long Click Listener
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> arg0, View v,
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         aTodoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, TodoList);
     }
 
+    @OnClick(R.id.btnAddItem)
     public void onAddItem(View view) {
         aTodoAdapter.add(etEditText.getText().toString());
         tododb.addTask(TodoList.size() - 1, etEditText.getText().toString());
