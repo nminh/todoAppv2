@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     ListView lvItems;
     EditText etEditText;
     private final int REQUEST_CODE = 01;
+    public static final String ITEM_NAME = "todoItemName";
+    public static final String ITEM_POSITION = "position";
     TodoItemDatabase tododb;
 
     @Override
@@ -71,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchEditItemView(int pos){
         Intent i =  new Intent(this, EditItemActivity.class);
-        i.putExtra("todoItemName", getViewByPosition(pos,lvItems));
-        i.putExtra("position", pos);
+        i.putExtra(ITEM_NAME, getViewByPosition(pos,lvItems));
+        i.putExtra(ITEM_POSITION, pos);
         startActivityForResult(i, REQUEST_CODE);
     }
 
@@ -91,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE is defined above
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            String todoItemName = data.getExtras().getString("todoItemName");
-            int pos = data.getExtras().getInt("position");
+            String todoItemName = data.getExtras().getString(ITEM_NAME);
+            int pos = data.getExtras().getInt(ITEM_POSITION);
             TodoList.set(pos, todoItemName);
             aTodoAdapter.notifyDataSetChanged();
             // Toast the name to display temporarily on screen
