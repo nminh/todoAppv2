@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // REQUEST_CODE is defined above
+        // Edit Item
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             String todoItemName = data.getExtras().getString(ITEM_NAME);
             int pos = data.getExtras().getInt(ITEM_POSITION);
@@ -115,10 +115,14 @@ public class MainActivity extends AppCompatActivity {
             // Update to SQLite Database
             tododb.updateTaskName(pos, todoItemName);
         }
-        else if(resultCode == RESULT_OK && requestCode == REQUEST_CODE_ADD_ITEM){
+        // Add new Item
+        else if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_ADD_ITEM) {
             String newItem = data.getExtras().getString(NEW_ITEM);
             aTodoAdapter.add(newItem);
-            tododb.addTask(TodoList.size() - 1, etEditText.getText().toString());
+            // Toast the name to display temporarily on screen
+            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+            // Update to SQLite Database
+            tododb.addTask(TodoList.size() - 1, newItem);
         }
     }
 
