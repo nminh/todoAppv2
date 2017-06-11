@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String ITEM_POSITION = "position";
     public static final String NEW_ITEM = "newItem";
     TodoItemDatabase tododb;
-    @BindView(R.id.edEditTest)
-    EditText etEditText;
     @BindView(R.id.lvItems)
     ListView lvItems;
     @BindView(R.id.my_toolbar)
@@ -77,13 +75,6 @@ public class MainActivity extends AppCompatActivity {
         aTodoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, TodoList);
     }
 
-    @OnClick(R.id.btnAddItem)
-    public void onAddItem(View view) {
-        aTodoAdapter.add(etEditText.getText().toString());
-        tododb.addTask(TodoList.size() - 1, etEditText.getText().toString());
-        etEditText.setText("");
-    }
-
     public void launchEditItemView(int pos) {
         Intent i = new Intent(this, EditItemActivity.class);
         i.putExtra(ITEM_NAME, getViewByPosition(pos, lvItems));
@@ -104,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Edit Item
+        // REQUEST_CODE is defined above
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             String todoItemName = data.getExtras().getString(ITEM_NAME);
             int pos = data.getExtras().getInt(ITEM_POSITION);
@@ -115,13 +106,9 @@ public class MainActivity extends AppCompatActivity {
             // Update to SQLite Database
             tododb.updateTaskName(pos, todoItemName);
         }
-        // Add new Item
-        else if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_ADD_ITEM) {
+        else if(resultCode == RESULT_OK && requestCode == REQUEST_CODE_ADD_ITEM){
             String newItem = data.getExtras().getString(NEW_ITEM);
             aTodoAdapter.add(newItem);
-            // Toast the name to display temporarily on screen
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
-            // Update to SQLite Database
             tododb.addTask(TodoList.size() - 1, newItem);
         }
     }

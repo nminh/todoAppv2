@@ -8,4 +8,6 @@
     <string name="tv_add_item_text">Add below Item:</string>
     <string name="et_new_item_text">new item</string>
     <string name="btn_Add_text">Add</string>
+    <string name="menuSave">Save</string>
+    <string name="menuCancel">Cancel</string>
 </resources>
